@@ -58,15 +58,17 @@ $bankLogos = [
                                 </svg>
                                 <span>Ипотека от 4 банков</span>
                             </div>
-                            <?php foreach ($bankLogos as $bankLogo): ?>
-                                <div class="header-content__mortgage-block__item">
-                                    <img class="header-content__mortgage-block__item_color"
-                                         src="<?= get_template_directory_uri() . $bankLogo["color"] ?>" alt="">
-                                    <img class="header-content__mortgage-block__item_white"
-                                         src="<?= get_template_directory_uri() . $bankLogo["white"] ?>"
-                                         alt="">
-                                </div>
-                            <?php endforeach; ?>
+                            <div class="header-content__mortgage-block__bank-items">
+                                <?php foreach ($bankLogos as $bankLogo): ?>
+                                    <div class="header-content__mortgage-block__bank-items__item">
+                                        <img class="header-content__mortgage-block__bank-items__item_color"
+                                             src="<?= get_template_directory_uri() . $bankLogo["color"] ?>" alt="">
+                                        <img class="header-content__mortgage-block__bank-items__item_white"
+                                             src="<?= get_template_directory_uri() . $bankLogo["white"] ?>"
+                                             alt="">
+                                    </div>
+                                <?php endforeach; ?>
+                            </div>
                         </div>
                         <div class="header-content__buttons">
                             <a href="<?= get_field("marquiz_link", 8) ?>" class="button">Рассчитать строительство</a>

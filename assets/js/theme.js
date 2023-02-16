@@ -457,12 +457,10 @@ jQuery(document).ready(function($) {
 
 	$(".header-content__mortgage-block").on({
 		mouseenter: function () {
-			console.log("ok")
 			$(this).addClass("active")
 		},
 		mouseleave: function () {
 			$(this).removeClass("active")
-			//stuff to do on mouse leave
 		}
 	});
 
