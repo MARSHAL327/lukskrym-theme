@@ -9,7 +9,7 @@
 <?php
 $posts = get_posts([
     'post_type' => 'post',
-    'category' => 34,
+    'category_name' => 'otzyvy',
     'numberposts' => 9,
     'orderby' => 'date',
     'order' => 'DESC',
