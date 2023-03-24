@@ -1,5 +1,6 @@
 @import "fonts";
 @import "libs";
+@import "vars";
 
 $default-font: 'Manrope', sans-serif;
 $accent: #E6BB62;
@@ -388,6 +389,11 @@ input[type=submit] {
 
 .page-content-wrapper {
     padding: 180px 0 100px;
+
+    &_no-padding {
+        padding-top: 139px;
+        padding-bottom: 0;
+    }
 }
 
 .paraxify {
@@ -1216,7 +1222,6 @@ input[type=submit] {
 form {
     input,
     textarea {
-        border-radius: 6px;
         margin-top: 20px;
     }
 
@@ -1226,7 +1231,6 @@ form {
 
     input[type=submit] {
         width: 100%;
-        border-radius: 6px;
         padding: 19px 22px;
         margin-bottom: 13px;
     }
@@ -1318,6 +1322,20 @@ form {
 
     // -------------------------------------------------------
     // ---- HOME
+}
+
+.bank-items {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+
+    &__item:nth-child(3) {
+        width: 103px;
+    }
+
+    &__item_color {
+        display: none;
+    }
 }
 
 .home {
@@ -1461,29 +1479,15 @@ form {
             backdrop-filter: blur(16px);
             font-size: 14px;
 
-            &__bank-items{
-                display: flex;
-                align-items: center;
-                gap: 12px;
-
-                &__item:nth-child(3){
-                    width: 103px;
-                }
-
-                &__item_color{
-                    display: none;
-                }
-            }
-
             & img{
                 max-height: 30px;
             }
 
-            &.active .header-content__mortgage-block__bank-items__item_color{
+            &.active .bank-items__item_color {
                 display: block;
             }
 
-            &.active .header-content__mortgage-block__bank-items__item_white{
+            &.active .bank-items__item_white {
                 display: none;
             }
         }
@@ -2315,7 +2319,6 @@ form {
         background: #FFF;
         color: $text;
         text-align: center;
-        border-radius: 6px;
         padding: 40px;
         margin-left: auto;
 
@@ -5924,10 +5927,6 @@ form {
     margin: 30px 0;
 }
 
-.star-rating {
-
-}
-
 .author {
     display: flex;
     align-items: center;
@@ -6139,14 +6138,396 @@ form {
     }
 }
 
-.text_blue{
+.text_blue {
     color: $main-color;
 }
 
-.top-line__wrapper{
+.top-line__wrapper {
     display: flex;
     justify-content: space-between;
     gap: 20px;
+}
+
+.background {
+    position: relative;
+    background-repeat: no-repeat;
+    background-position: center;
+    padding: 40px;
+
+    & > * {
+        position: relative;
+        z-index: 1;
+    }
+
+    &:before {
+        content: '';
+        display: block;
+        position: absolute;
+        left: 0;
+        top: 0;
+        width: 100%;
+        height: 100%;
+    }
+
+    &_blur:before {
+        backdrop-filter: blur(4px) brightness(30%);
+    }
+
+    &_blur {
+        color: #fff;
+    }
+}
+
+.form-description {
+    display: flex;
+    flex-wrap: wrap;
+    justify-items: self-end;
+
+    &__description {
+        width: 45%;
+
+        &-block {
+            display: grid;
+            gap: 15px;
+            margin-bottom: 20px;
+        }
+    }
+
+    input {
+        margin-top: 6px;
+    }
+
+    label {
+        margin-top: 5px;
+    }
+
+    &__form.form {
+        padding: 30px;
+        text-align: left;
+
+        & .form__title{
+            margin-top: 0;
+        }
+
+        & .wpcf7-select, & input{
+            padding: 10px 20px;
+        }
+    }
+
+    .bank-items__item:nth-child(3) {
+        width: auto;
+    }
+}
+
+.form-group {
+    & .wpcf7-radio {
+        display: flex;
+        gap: 10px;
+
+        .wpcf7-list-item {
+            margin: 0;
+        }
+
+        & label {
+            display: grid;
+            grid-auto-flow: column;
+            gap: 5px;
+
+            & input {
+                margin-top: 0;
+            }
+        }
+    }
+
+    & .wpcf7-select {
+        width: 100%;
+        padding: 16px 22px;
+        border: 1px solid #ccc;
+        margin-top: 6px;
+    }
+}
+
+.mortgage-types {
+    display: flex;
+    gap: 30px;
+
+    &__item {
+        display: grid;
+        justify-items: center;
+        gap: 10px;
+
+        & img {
+            height: 40px;
+            filter: invert(95%) sepia(0%) saturate(0%) hue-rotate(135deg) brightness(104%) contrast(105%);
+        }
+    }
+}
+
+.mortgage-documents {
+    & span {
+        color: $black-grey;
+    }
+
+    & h4 {
+        font-weight: bold;
+    }
+
+    & ol {
+        position: relative;
+        list-style-type: none;
+        counter-reset: my-counter;
+
+        & li:before {
+            content: counter(my-counter) ' ';
+            counter-increment: my-counter;
+            color: $black-grey;
+            font-weight: 400;
+            margin-right: 15px;
+            display: block;
+            position: absolute;
+            left: 0;
+        }
+    }
+
+    .roadmap {
+        height: 100%;
+        flex-direction: column;
+    }
+}
+
+.credit-steps{
+    display: grid;
+    gap: 60px;
+
+    &__item{
+        display: grid;
+        gap: 50px;
+        background: #FFFFFF;
+        box-shadow: $big-shadow;
+        padding: 60px 120px;
+    }
+
+    &__header{
+        display: flex;
+        gap: 30px;
+
+        & img{
+            filter: invert(78%) sepia(43%) saturate(508%) hue-rotate(351deg) brightness(92%) contrast(95%);
+            max-width: initial;
+            width: 130px;
+            height: 130px;
+        }
+    }
+
+    &__title{
+        font-size: 30px;
+        font-weight: bold;
+        margin-bottom: 15px;
+    }
+
+    &__description{
+        color: $black-grey;
+    }
+
+    &__steps{
+        position: relative;
+        display: flex;
+        flex-wrap: wrap;
+        gap: 50px;
+
+        &:before{
+            content: '';
+            position: absolute;
+            left: 0;
+            width: 100%;
+            height: 1px;
+            background-color: #f0f0f0;
+            top: 92px;
+            z-index: 1;
+        }
+    }
+
+    &__steps-item{
+        display: flex;
+        flex-direction: column;
+        gap: 20px;
+        width: 180px;
+
+        &__point{
+            position: relative;
+            width: 15px;
+            height: 15px;
+            border-radius: 100%;
+            border: 1px solid $gold;
+            background-color: #fff;
+            z-index: 2;
+        }
+
+        &__num{
+            font-size: 64px;
+            color: $gold;
+            line-height: 1;
+        }
+    }
+}
+
+section{
+    margin-bottom: 60px;
+}
+
+.special-credits{
+    display: flex;
+    flex-wrap: wrap;
+    gap: 60px;
+    text-align: center;
+
+    &__item{
+        flex: 1;
+        display: grid;
+        gap: 25px;
+        align-content: start;
+        justify-items: center;
+        background: #FFFFFF;
+        box-shadow: $big-shadow;
+        padding: 60px;
+    }
+
+    &__title{
+        font-size: 22px;
+        font-weight: 700;
+        line-height: 1;
+    }
+
+    &__description{
+        color: $black-grey;
+    }
+
+    & img{
+        height: 160px;
+        filter: invert(30%) sepia(81%) saturate(6508%) hue-rotate(178deg) brightness(96%) contrast(101%);
+    }
+}
+
+.credit-calculator{
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    gap: 30px 40px;
+}
+
+.input-sliders{
+    display: grid;
+    gap: 10px;
+
+    &__line{
+        display: flex;
+        justify-content: space-between;
+    }
+
+    &__result{
+        color: $main-color;
+        font-weight: bold;
+    }
+
+    & .input-sliders__slider{
+        position: relative;
+        -webkit-appearance: none;
+        appearance: none;
+        height: 17px;
+        background: #E2E2E2;
+        outline: none;
+        border-radius: 10px;
+        border-color: transparent;
+        padding: 0;
+        z-index: 2;
+        overflow: hidden;
+
+        &:hover{
+            border-color: transparent;
+            cursor: pointer;
+        }
+
+        &::-webkit-slider-thumb{
+            -webkit-appearance: none;
+            appearance: none;
+            width: 15px;
+            height: 15px;
+            border-radius: 100%;
+            border: 3px solid $main-color;
+            background: #fff;
+            cursor: pointer;
+            transition: .3s;
+            z-index: 2;
+            box-shadow: -407px 0 0 400px $main-color;
+
+            &:hover{
+                background: $main-color;
+                transition: .3s;
+            }
+        }
+    }
+}
+
+.credit-result{
+    display: flex;
+    align-items: center;
+    box-shadow: $big-shadow;
+    background-color: #fff;
+    padding: 20px 40px;
+
+    &__results{
+        flex: 1;
+        border-right: 1px solid $black-grey;
+        margin-right: 40px;
+    }
+
+    &__results-item{
+        display: grid;
+    }
+
+    &__call{
+        display: grid;
+        gap: 10px;
+        text-align: center;
+
+        & h4{
+            margin: 0;
+        }
+    }
+}
+
+.text_grey{
+    color: $black-grey;
+}
+
+.text_bold{
+    font-weight: bold;
+}
+
+.text_big{
+    font-size: 36px;
+}
+
+.whatsapp-btn{
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    color: #fff;
+    font-size: 14px;
+    background-color: #43D854;
+    padding: 15px 20px;
+    transition: .3s;
+
+    &:hover{
+        color: #fff;
+        background-color: #3dbe4d;
+        transition: .3s;
+    }
+}
+
+.mobile-call{
+    display: none;
+    color: green;
+    padding-right: 20px;
 }
 
 @import "media";

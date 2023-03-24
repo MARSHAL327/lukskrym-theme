@@ -4,24 +4,9 @@
 	Слайдер на главной
 */
 
-$bankLogos = [
-    [
-        "color" => "/assets/images/BR_logo_white_letter.png",
-        "white" => "/assets/images/BR_logo_white.png",
-    ],
-    [
-        "color" => "/assets/images/LOGO_HOME_white_letter.png",
-        "white" => "/assets/images/LOGO_HOME_white.png",
-    ],
-    [
-        "color" => "/assets/images/SBER_LOGO_white_letter.png",
-        "white" => "/assets/images/SBER_LOGO_white.png",
-    ],
-    [
-        "color" => "/assets/images/RNCB_white_letter.png",
-        "white" => "/assets/images/RNCB_white.png",
-    ],
-]
+/**
+ * @var $bankLogos
+ */
  ?>
 
 <div class="header-slider">
@@ -58,12 +43,12 @@ $bankLogos = [
                                 </svg>
                                 <span>Ипотека от 4 банков</span>
                             </div>
-                            <div class="header-content__mortgage-block__bank-items">
+                            <div class="bank-items">
                                 <?php foreach ($bankLogos as $bankLogo): ?>
-                                    <div class="header-content__mortgage-block__bank-items__item">
-                                        <img class="header-content__mortgage-block__bank-items__item_color"
+                                    <div class="bank-items__item">
+                                        <img class="bank-items__item_color"
                                              src="<?= get_template_directory_uri() . $bankLogo["color"] ?>" alt="">
-                                        <img class="header-content__mortgage-block__bank-items__item_white"
+                                        <img class="bank-items__item_white"
                                              src="<?= get_template_directory_uri() . $bankLogo["white"] ?>"
                                              alt="">
                                     </div>

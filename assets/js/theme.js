@@ -464,6 +464,45 @@ jQuery(document).ready(function($) {
 		}
 	});
 
+	function prettify (num) {
+		var n = num.toString();
+		var separator = " ";
+		return n.replace(/(\d{1,3}(?=(?:\d\d\d)+(?!\d)))/g, "$1" + separator);
+	}
+
+	function calculateCreditMonthPay(){
+		console.log("ok")
+		let creditSumName = "credit-sum"
+		let creditTermName = "credit-term"
+		let initialPaymentName = "initial-payment"
+
+		let creditSum = $(`input[name=${creditSumName}]`).val()
+		let creditTerm = $(`input[name=${creditTermName}]`).val()
+		let initialPayment = $(`input[name=${initialPaymentName}]`).val()
+
+		// Ставим полям начальные значения
+		$(`#${creditSumName}`).text(prettify(creditSum))
+		$(`#${creditTermName}`).text(creditTerm)
+		$(`#${initialPaymentName}`).text(initialPayment)
+
+		let paymentCount = creditTerm * 12
+		let monthInterestRate = 7.5 / 12 / 100
+		let initialPaymentNumber = creditSum * initialPayment / 100
+		let annuityCoefficient  = monthInterestRate * Math.pow((1 + monthInterestRate), paymentCount) / (Math.pow((1 + monthInterestRate), paymentCount) - 1)
+		let monthlyPayment = Math.trunc((creditSum - initialPaymentNumber) * annuityCoefficient)
+		let totalPay = Math.trunc(monthlyPayment * paymentCount)
+
+		$("#monthly-payment").text(prettify(monthlyPayment))
+		$("#total-pay").text(prettify(totalPay))
+	}
+
+	calculateCreditMonthPay()
+
+	$(".input-sliders__slider").on({
+		mousemove: calculateCreditMonthPay,
+		touchmove: calculateCreditMonthPay,
+		change: calculateCreditMonthPay,
+	})
 });
 
 jQuery(window).load(function($) {

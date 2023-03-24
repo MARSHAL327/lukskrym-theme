@@ -1106,6 +1106,46 @@
 			margin-left: 30px;
 		}
 	}
+
+	.mortgage-documents {
+		& .roadmap {
+			padding: 40px;
+		}
+
+		& .roadmap-description {
+			&__title {
+				font-size: 20px;
+			}
+
+			& p {
+				font-size: 16px;
+			}
+
+			& .button-accent {
+				width: 220px;
+			}
+		}
+	}
+
+	.credit-result {
+		font-size: 14px;
+
+		&__results {
+			margin-right: 30px;
+		}
+
+		& h4 {
+			font-size: 18px;
+		}
+	}
+
+	.whatsapp-btn {
+		padding: 10px 15px;
+	}
+
+	.text_big{
+		font-size: 32px;
+	}
 }
 
 
@@ -1984,6 +2024,80 @@
 		.section-building-standards {
 			padding: 70px 0 50px;
 		}
+	}
+
+	.form-description__description {
+		width: 100%;
+	}
+
+	.credit-steps {
+		&__header {
+			justify-content: center;
+			text-align: center;
+			flex-wrap: wrap;
+		}
+
+		&__item {
+			padding: 40px;
+		}
+
+		&__steps {
+			gap: 20px;
+			justify-content: center;
+			text-align: center;
+
+			&:before {
+				display: none;
+			}
+		}
+
+		&__steps-item {
+			width: 120px;
+			gap: 5px;
+
+			&__point {
+				display: none;
+			}
+		}
+
+		& img {
+			width: 160px;
+		}
+	}
+
+	.credit-calculator {
+		grid-template-columns: 1fr;
+
+		& .credit-result {
+			flex-wrap: wrap;
+			justify-content: center;
+			text-align: center;
+			gap: 10px;
+
+			&__results {
+				margin-right: 0;
+				width: auto;
+				border: 0;
+			}
+		}
+	}
+
+	.special-credits__item{
+		padding: 40px;
+	}
+
+	.whatsapp-btn {
+		gap: 10px;
+	}
+
+	.page-content-wrapper_no-padding{
+		padding-bottom: 0;
+	}
+
+	.mortgage-types{
+		display: grid;
+		grid-template-columns: repeat(2, 100px);
+		margin: 0 auto;
 	}
 }
 
@@ -5632,6 +5746,9 @@
 	}
 	.show-more {
 		bottom: 33px;
+	}
+	.mobile-call{
+		display: block;
 	}
 }
 

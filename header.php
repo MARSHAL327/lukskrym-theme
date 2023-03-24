@@ -4,20 +4,23 @@
  *
  * This is the template that displays all of the <head> section and everything up until <div id="content">
  *
- * @link https://developer.wordpress.org/themes/basics/template-files/#template-partials
+ * @link    https://developer.wordpress.org/themes/basics/template-files/#template-partials
  *
  * @package lukskrym
  */
+
+$phone1 = get_field('phone_1', 8);
+$phone2 = get_field('phone_2', 8);
 
 ?>
 <!doctype html>
 <html <?php language_attributes(); ?>>
 <head>
-    <meta charset="<?php bloginfo( 'charset' ); ?>">
+    <meta charset="<?php bloginfo('charset'); ?>">
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <link rel="profile" href="https://gmpg.org/xfn/11">
 
-    <meta name="google-site-verification" content="XuvyZ4eDIHP23Kk-1XpYtF_zkZzFcXbNKocCT8RZkDU" />
+    <meta name="google-site-verification" content="XuvyZ4eDIHP23Kk-1XpYtF_zkZzFcXbNKocCT8RZkDU"/>
     <meta name="yandex-verification" content="5e2a8878bd116d16" />
     <meta name="google-site-verification" content="ThCvIQJuNs7902jtGylmBxmzkOVsaEqJ7uX3kF4k9zA" />
     <meta name="facebook-domain-verification" content="oxa8s61l7116982m1p2es4df9dma1r" />
@@ -199,21 +202,24 @@
                                 <nav id="site-navigation" class="main-navigation">
                                     <?php
                                     wp_nav_menu(
-                                        array(
+                                        [
                                             'theme_location' => 'main-menu',
-                                            'menu_id'        => 'primary-menu',
-                                        )
+                                            'menu_id' => 'primary-menu',
+                                        ]
                                     );
                                     ?>
                                 </nav>
                             </div>
                             <div class="phones">
                                 <ul>
-                                    <li><a href="tel:88005116972" class="tel"><?php the_field( 'phone_1', 8 ); ?></a></li>
-                                    <li><a href="tel:+79789083406" class="tel"><?php the_field( 'phone_2', 8 ); ?></a></li>
+                                    <li><a href="tel:<?= $phone1 ?>" class="tel"><?= $phone1 ?></a></li>
+                                    <li><a href="tel:<?= $phone2 ?>" class="tel"><?= $phone2 ?></a></li>
                                 </ul>
 
                                 <a href="#callback-form" class="button button-popup">Заказать звонок</a>
+                                <a href="tel:79789083406" class="mobile-call" style="color:green !important;padding-right:20px;">
+                                    <img src="https://lukskrym.ru/wp-content/uploads/2022/04/pngwing.com1_-e1650366698184.png">
+                                </a>
                                 <button id="mobileNavButton" class="cmn-toggle-switch cmn-toggle-switch__htx">
                                     <span>toggle menu</span>
                                 </button>
@@ -228,17 +234,17 @@
     <nav id="mobileNav" class="mobile-navigation">
         <?php
         wp_nav_menu(
-            array(
+            [
                 'theme_location' => 'main-menu',
-                'menu_id'        => 'primary-menu',
-            )
+                'menu_id' => 'primary-menu',
+            ]
         );
         ?>
 
         <div class="phones">
             <ul>
-                <li><a href="tel:88005116972"><?php the_field( 'phone_1', 8 ); ?></a></li>
-                <li><a href="tel:+79789083406"><?php the_field( 'phone_2', 8 ); ?></a></li>
+                <li><a href="tel:<?= $phone1 ?>"><?= $phone1 ?></a></li>
+                <li><a href="tel:<?= $phone2 ?>"><?= $phone2 ?></a></li>
             </ul>
         </div>
 

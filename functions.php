@@ -9,7 +9,7 @@
 
 if ( ! defined( '_S_VERSION' ) ) {
 	// Replace the version number of the theme on each release.
-	define( '_S_VERSION', '1.0.0' );
+	define( '_S_VERSION', '1.1.2' );
 }
 
 /**
@@ -148,7 +148,7 @@ add_action( 'widgets_init', 'lukskrym_widgets_init' );
  */
 function lukskrym_scripts() {
 	
-	wp_register_style( 'lukskrym-style', get_stylesheet_directory_uri() . '/assets/css/theme.min.css', array('tablepress-default', 'contact-form-7'), '1.2', 'all');
+	wp_register_style( 'lukskrym-style', get_stylesheet_directory_uri() . '/assets/css/theme.min.css', array('tablepress-default', 'contact-form-7'), '1.6', 'all');
 
 	wp_enqueue_style( 'lukskrym-style' );
 
@@ -454,3 +454,22 @@ function add_menu_list_item_class($classes, $item, $args)
 }
 
 add_filter('nav_menu_css_class', 'add_menu_list_item_class', 1, 3);
+
+$bankLogos = [
+    [
+        "color" => "/assets/images/BR_logo_white_letter.png",
+        "white" => "/assets/images/BR_logo_white.png",
+    ],
+    [
+        "color" => "/assets/images/LOGO_HOME_white_letter.png",
+        "white" => "/assets/images/LOGO_HOME_white.png",
+    ],
+    [
+        "color" => "/assets/images/SBER_LOGO_white_letter.png",
+        "white" => "/assets/images/SBER_LOGO_white.png",
+    ],
+    [
+        "color" => "/assets/images/RNCB_white_letter.png",
+        "white" => "/assets/images/RNCB_white.png",
+    ],
+];
