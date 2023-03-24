@@ -10,8 +10,8 @@ Template Name: Ипотека
 
 $phone2 = get_field('phone_2', 8);
 $whatsAppLink = get_field("whatsapp", 8);
-$mortgageTypes = get_field("mortgage_types");
-$specialCredits = get_field("special_credits");
+$mortgageTypes = get_field("mortgage_types") ?? [];
+$specialCredits = get_field("special_credits") ?? [];
 $mortgageTypesWithSteps = [];
 
 foreach ($mortgageTypes as $mortgageType) {
@@ -198,58 +198,62 @@ foreach ($mortgageTypes as $mortgageType) {
             </div>
         </section>
 
-        <section>
-            <h2>Доступные виды ипотеки</h2>
-            <div class="credit-steps">
-                <?php foreach ($mortgageTypesWithSteps as $mortgageTypeWithSteps): ?>
-                    <div class="credit-steps__item">
-                        <div class="credit-steps__header">
-                            <div class="credit-steps__icon">
-                                <img src="<?= $mortgageTypeWithSteps["icon"]["url"] ?>" alt="">
-                            </div>
-                            <div class="credit-steps__text">
-                                <div class="credit-steps__title">
-                                    <?= $mortgageTypeWithSteps["name"] ?>
+        <?php if( $mortgageTypesWithSteps ): ?>
+            <section>
+                <h2>Доступные виды ипотеки</h2>
+                <div class="credit-steps">
+                    <?php foreach ($mortgageTypesWithSteps as $mortgageTypeWithSteps): ?>
+                        <div class="credit-steps__item">
+                            <div class="credit-steps__header">
+                                <div class="credit-steps__icon">
+                                    <img src="<?= $mortgageTypeWithSteps["icon"]["url"] ?>" alt="">
                                 </div>
-                                <div class="credit-steps__description">
-                                    <?= $mortgageTypeWithSteps["description"] ?>
-                                </div>
-                            </div>
-                        </div>
-                        <div class="credit-steps__steps">
-                            <?php foreach ($mortgageTypeWithSteps["credit_steps"] as $i => $credit_step): ?>
-                                <div class="credit-steps__steps-item">
-                                    <div class="credit-steps__steps-item__num">0<?= $i + 1 ?></div>
-                                    <div class="credit-steps__steps-item__point"></div>
-                                    <div class="credit-steps__steps-item__title">
-                                        <?= $credit_step["credit_step"] ?>
+                                <div class="credit-steps__text">
+                                    <div class="credit-steps__title">
+                                        <?= $mortgageTypeWithSteps["name"] ?>
+                                    </div>
+                                    <div class="credit-steps__description">
+                                        <?= $mortgageTypeWithSteps["description"] ?>
                                     </div>
                                 </div>
-                            <?php endforeach; ?>
+                            </div>
+                            <div class="credit-steps__steps">
+                                <?php foreach ($mortgageTypeWithSteps["credit_steps"] as $i => $credit_step): ?>
+                                    <div class="credit-steps__steps-item">
+                                        <div class="credit-steps__steps-item__num">0<?= $i + 1 ?></div>
+                                        <div class="credit-steps__steps-item__point"></div>
+                                        <div class="credit-steps__steps-item__title">
+                                            <?= $credit_step["credit_step"] ?>
+                                        </div>
+                                    </div>
+                                <?php endforeach; ?>
+                            </div>
                         </div>
-                    </div>
-                <?php endforeach; ?>
-            </div>
-        </section>
+                    <?php endforeach; ?>
+                </div>
+            </section>
+        <?php endif; ?>
 
-        <section>
-            <h2>Специальные предложения по ипотеке</h2>
-            <div class="special-credits">
-                <?php foreach ($specialCredits as $specialCredit): ?>
-                    <div class="special-credits__item">
-                        <div class="special-credits__icon">
-                            <img src="<?= $specialCredit["icon"]["url"] ?>" alt="">
+        <?php if( $specialCredits ): ?>
+            <section>
+                <h2>Специальные предложения по ипотеке</h2>
+                <div class="special-credits">
+                    <?php foreach ($specialCredits as $specialCredit): ?>
+                        <div class="special-credits__item">
+                            <div class="special-credits__icon">
+                                <img src="<?= $specialCredit["icon"]["url"] ?>" alt="">
+                            </div>
+                            <div class="special-credits__title">
+                                <?= $specialCredit["name"] ?>
+                            </div>
+                            <div class="special-credits__description">
+                                <?= $specialCredit["description"] ?>
+                            </div>
                         </div>
-                        <div class="special-credits__title">
-                            <?= $specialCredit["name"] ?>
-                        </div>
-                        <div class="special-credits__description">
-                            <?= $specialCredit["description"] ?>
-                        </div>
-                    </div>
-                <?php endforeach; ?>
-            </div>
-        </section>
+                    <?php endforeach; ?>
+                </div>
+            </section>
+        <?php endif; ?>
     </div>
 
 <?php get_footer(); ?>
