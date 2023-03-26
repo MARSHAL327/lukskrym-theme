@@ -217,7 +217,7 @@ $phone2 = get_field('phone_2', 8);
                                 </ul>
 
                                 <a href="#callback-form" class="button button-popup">Заказать звонок</a>
-                                <a href="tel:79789083406" class="mobile-call" style="color:green !important;padding-right:20px;">
+                                <a href="tel:<?= $phone2 ?>" class="mobile-call" style="color:green !important;padding-right:20px;">
                                     <img src="https://lukskrym.ru/wp-content/uploads/2022/04/pngwing.com1_-e1650366698184.png">
                                 </a>
                                 <button id="mobileNavButton" class="cmn-toggle-switch cmn-toggle-switch__htx">
