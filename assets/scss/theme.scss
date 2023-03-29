@@ -6322,7 +6322,7 @@ form {
     &__title{
         font-size: 30px;
         font-weight: bold;
-        margin-bottom: 15px;
+        margin: 0 0 15px 0;
     }
 
     &__description{
@@ -6396,6 +6396,7 @@ section{
         font-size: 22px;
         font-weight: 700;
         line-height: 1;
+        margin: 0;
     }
 
     &__description{

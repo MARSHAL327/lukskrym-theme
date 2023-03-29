@@ -471,7 +471,6 @@ jQuery(document).ready(function($) {
 	}
 
 	function calculateCreditMonthPay(){
-		console.log("ok")
 		let creditSumName = "credit-sum"
 		let creditTermName = "credit-term"
 		let initialPaymentName = "initial-payment"
