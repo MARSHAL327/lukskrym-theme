@@ -12,7 +12,7 @@
                         Работаем со всеми видами ипотек: стандартная, военная, сельская и IT ипотека
                     </div>
 
-                    <div class="banks__items">
+                    <a href="/ipoteka" class="banks__items">
                         <div class="banks__item">
                             <img src="<?= get_template_directory_uri() . "/assets/images/BR_logo.png" ?>" alt="">
                         </div>
@@ -25,7 +25,7 @@
                         <div class="banks__item">
                             <img src="<?= get_template_directory_uri() . "/assets/images/RNCB.png" ?>" alt="">
                         </div>
-                    </div>
+                    </a>
                 </div>
             </div>
         </div>

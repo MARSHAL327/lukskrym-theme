@@ -33,7 +33,7 @@
                             <h1><?php the_field('home_header_title'); ?></h1>
                         </div>
                         <?php if( $bankLogos ): ?>
-                            <div class="header-content__mortgage-block">
+                            <a href="/ipoteka" class="header-content__mortgage-block">
                                 <div class="header-content__mortgage-block__item">
                                     <svg width="18" height="17" viewBox="0 0 18 17" fill="none"
                                          xmlns="http://www.w3.org/2000/svg">
@@ -55,7 +55,7 @@
                                         </div>
                                     <?php endforeach; ?>
                                 </div>
-                            </div>
+                            </a>
                         <?php endif; ?>
                         <div class="header-content__buttons">
                             <a href="<?= get_field("marquiz_link", 8) ?>" class="button">Рассчитать строительство</a>

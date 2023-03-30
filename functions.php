@@ -148,7 +148,7 @@ add_action( 'widgets_init', 'lukskrym_widgets_init' );
  */
 function lukskrym_scripts() {
 	
-	wp_register_style( 'lukskrym-style', get_stylesheet_directory_uri() . '/assets/css/theme.min.css', array('tablepress-default', 'contact-form-7'), '1.7', 'all');
+	wp_register_style( 'lukskrym-style', get_stylesheet_directory_uri() . '/assets/css/theme.min.css', array('tablepress-default', 'contact-form-7'), '1.8', 'all');
 
 	wp_enqueue_style( 'lukskrym-style' );
 
