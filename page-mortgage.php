@@ -29,7 +29,7 @@ foreach ($mortgageTypes as $mortgageType) {
 
     <div class="page-content-wrapper page-content-wrapper_no-padding">
         <section class="background background_blur background_brightness section-order-consultation section-order-form"
-                 style="background-image: url(<?= get_stylesheet_directory_uri() . '/assets/images/bg/mortgage_bg.png' ?>)">
+                 style="background-image: url(<?= get_stylesheet_directory_uri() . '/assets/images/bg/credit_bg.png' ?>)">
             <div class="container">
                 <div class="form-description">
                     <div class="form-description__description">
