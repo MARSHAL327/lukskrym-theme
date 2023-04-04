@@ -4,6 +4,7 @@
 	Карта
 */
 
+$mapCoords = get_field("map_coord");
  ?>
 
 <div class="map">
@@ -16,13 +17,12 @@
 	</div>
 	<div id="map" class="map-wrapper">
 		<script src="https://api-maps.yandex.ru/2.1/?apikey=ab6a5dd8-c65e-4f4e-9e9a-eea63b553be5&lang=ru_RU" type="text/javascript"></script>
-
 		<script>
 			ymaps.ready(init);
 
 			function init(){
 				var myMap = new ymaps.Map("map", {
-					center: [44.599059, 33.521165],
+					center: [<?= $mapCoords["lat"] ?>, <?= $mapCoords["lon"] ?>],
 					zoom: 14
 				});
 
@@ -32,8 +32,8 @@
 				}
 
 				myMap.geoObjects
-					.add(new ymaps.Placemark([44.599059, 33.521165], {
-						balloonContent: '<strong>LUKS<br>г. Севастополь, ул. Гоголя 8<br><a href="https://yandex.ru/maps/?rtext=~44.599059%2C33.521165" target="_blank">Построить маршрут</a></strong>'
+					.add(new ymaps.Placemark([<?= $mapCoords["lat"] ?>, <?= $mapCoords["lon"] ?>], {
+						balloonContent: '<strong>LUKS<br><?= get_field("address") ?><br><a href="https://yandex.ru/maps/?rtext=~<?= $mapCoords["lat"] ?>%2C<?= $mapCoords["lon"] ?>" target="_blank">Построить маршрут</a></strong>'
 					}, {
 						iconLayout: 'default#image',
 						iconImageHref: '<?php echo get_stylesheet_directory_uri() . '/assets/images/luks-yamap.png' ?>',
