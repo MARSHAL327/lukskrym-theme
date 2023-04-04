@@ -459,14 +459,16 @@ jQuery(document).ready(function($) {
 	let numberSliderRefresh = 0
 
 	function pastSlideData(e){
-		if( numberSliderRefresh === 0 ) { numberSliderRefresh++; return false }
 		let titleEl = $(".header-content__title h1")
 		let linkEl = $(".header-content__buttons_link")
 
 		let currentSlide = e.visibleSlides
+		let link = currentSlide.attr("data-link") ? currentSlide.attr("data-link") : linkEl.attr("data-default-marquiz")
+
+		if( numberSliderRefresh === 0 ) { numberSliderRefresh++; return false }
+
 		let title = currentSlide.attr("data-title")
 		let description = currentSlide.attr("data-description")
-		let link = currentSlide.attr("data-link") ? currentSlide.attr("data-link") : linkEl.attr("data-default-marquiz")
 
 		titleEl.fadeOut(750, "linear", function (){
 			titleEl.html(`${title}<span>${description}</span>`).fadeIn(750)
@@ -488,6 +490,7 @@ jQuery(document).ready(function($) {
 		},
 		on: !onlyFirstSlideFilled && {
 			slideChange: pastSlideData,
+			init: pastSlideData,
 		},
 	});
 

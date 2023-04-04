@@ -74,7 +74,7 @@ $onlyFirstSlideFilled = count($homeSlider) - 1 == $emptyElements ? "true" : "fal
                             </a>
                         <?php endif; ?>
                         <div class="header-content__buttons">
-                            <a href="<?= $homeSlider[0]["link"] ? : $marquizLink ?>"
+                            <a href="<?= $marquizLink ?>"
                                data-default-marquiz="<?= $marquizLink ?>"
                                class="button header-content__buttons_link">Рассчитать строительство</a>
                             <a href="<?= $marquizLink ?>" class="button button-spacial">
