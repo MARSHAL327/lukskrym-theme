@@ -46,7 +46,7 @@ $onlyFirstSlideFilled = count($homeSlider) - 1 == $emptyElements ? "true" : "fal
                 <div class="header-content">
                     <div class="header-content__center">
                         <div class="header-content__title">
-                            <h1><?php the_field('home_header_title'); ?></h1>
+                            <h1><?= $homeSlider[0]["title"] ?> <span><?= $homeSlider[0]["description"] ?></span> </h1>
                         </div>
                         <?php if( $bankLogos ): ?>
                             <a href="/ipoteka" class="header-content__mortgage-block">
@@ -74,7 +74,7 @@ $onlyFirstSlideFilled = count($homeSlider) - 1 == $emptyElements ? "true" : "fal
                             </a>
                         <?php endif; ?>
                         <div class="header-content__buttons">
-                            <a href="<?= $marquizLink ?>"
+                            <a href="<?= $homeSlider[0]["link"] ? : $marquizLink ?>"
                                data-default-marquiz="<?= $marquizLink ?>"
                                class="button header-content__buttons_link">Рассчитать строительство</a>
                             <a href="<?= $marquizLink ?>" class="button button-spacial">
