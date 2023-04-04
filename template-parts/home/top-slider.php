@@ -1,4 +1,4 @@
-<?php 
+<?php
 
 /*
 	Слайдер на главной
@@ -7,22 +7,38 @@
 /**
  * @var $bankLogos
  */
- ?>
+
+$homeSlider = get_field('home_slider');
+$marquizLink = get_field("marquiz_link", 8);
+$emptyElements = 0;
+
+foreach ($homeSlider as $slide) {
+    if( trim($slide["title"]) == "" && trim($slide["description"]) == "" )
+        $emptyElements++;
+}
+
+$onlyFirstSlideFilled = count($homeSlider) - 1 == $emptyElements ? "true" : "false"
+?>
 
 <div class="header-slider">
-	<ul class="frontpage-slides">
+    <div class="frontpage-slides">
+        <div class="swiper frontpage-slides__swiper"
+             data-only-first-slide-filled="<?= $onlyFirstSlideFilled ?>"
+             style="--swiper-pagination-color: #007a9b;">
+            <div class="swiper-wrapper" >
+                <?php foreach ($homeSlider as $slide): ?>
+                    <div class="swiper-slide"
+                         data-title="<?= $slide["title"] ?>"
+                         data-description="<?= $slide["description"] ?>"
+                         data-link="<?= $slide["link"] ?>">
+                        <img src="<?= $slide["img"]["url"]; ?>"/>
+                    </div>
+                <?php endforeach; ?>
+            </div>
+            <div class="swiper-pagination"></div>
+        </div>
+    </div>
 
-		<?php $home_slider = get_field( 'home_slider' ); ?>
-
-		<?php if ( $home_slider ) :  ?>
-			<?php foreach ( $home_slider as $home_slider_slide ): ?>
-
-				<li style="background-image: url(<?php echo $home_slider_slide; ?>);"></li>
-
-            <?php endforeach; ?>
-        <?php endif; ?>
-
-    </ul>
 
     <div class="container">
         <div class="row">
@@ -58,8 +74,10 @@
                             </a>
                         <?php endif; ?>
                         <div class="header-content__buttons">
-                            <a href="<?= get_field("marquiz_link", 8) ?>" class="button">Рассчитать строительство</a>
-                            <a href="<?= get_field("marquiz_link", 8) ?>" class="button button-spacial">
+                            <a href="<?= $marquizLink ?>"
+                               data-default-marquiz="<?= $marquizLink ?>"
+                               class="button header-content__buttons_link">Рассчитать строительство</a>
+                            <a href="<?= $marquizLink ?>" class="button button-spacial">
                                 <svg width="24" height="24" viewBox="0 0 24 24" fill="none"
                                      xmlns="http://www.w3.org/2000/svg">
                                     <path d="M6.5014 17.5014C6.5014 17.2362 6.39605 16.9818 6.20851 16.7943C6.02097 16.6067 5.76662 16.5014 5.5014 16.5014C5.23619 16.5014 4.98183 16.6067 4.7943 16.7943C4.60676 16.9818 4.5014 17.2362 4.5014 17.5014L4.5014 19.5014C4.5014 19.7666 4.60676 20.0209 4.7943 20.2085C4.98183 20.396 5.23619 20.5014 5.5014 20.5014L19.5014 20.5014C19.7666 20.5014 20.021 20.396 20.2085 20.2085C20.396 20.0209 20.5014 19.7666 20.5014 19.5014L20.5014 17.5014C20.5014 17.2362 20.396 16.9818 20.2085 16.7943C20.021 16.6067 19.7666 16.5014 19.5014 16.5014C19.2362 16.5014 18.9818 16.6067 18.7943 16.7943C18.6068 16.9818 18.5014 17.2362 18.5014 17.5014L18.5014 18.5014L6.5014 18.5014L6.5014 17.5014Z"

@@ -455,6 +455,41 @@ jQuery(document).ready(function($) {
 		});
 	})
 
+	let onlyFirstSlideFilled = $(".frontpage-slides__swiper").attr("data-only-first-slide-filled") === "true"
+
+	function pastSlideData(e){
+		let titleEl = $(".header-content__title h1")
+		let linkEl = $(".header-content__buttons_link")
+
+		let currentSlide = e.visibleSlides
+		let title = currentSlide.attr("data-title")
+		let description = currentSlide.attr("data-description")
+		let link = currentSlide.attr("data-link") ? currentSlide.attr("data-link") : linkEl.attr("data-default-marquiz")
+
+		titleEl.fadeOut(750, "linear", function (){
+			titleEl.html(`${title}<span>${description}</span>`).fadeIn(750)
+		})
+		linkEl.attr("href", link)
+	}
+
+	let homeSlider = new Swiper(".frontpage-slides__swiper", {
+		effect: "fade",
+		loop: true,
+		speed: 1500,
+		autoplay: {
+			delay: 6000,
+			disableOnInteraction: false,
+		},
+		pagination: {
+			el: ".swiper-pagination",
+			clickable: true,
+		},
+		on: !onlyFirstSlideFilled && {
+			slideChange: pastSlideData,
+			init: pastSlideData
+		},
+	});
+
 	$(".header-content__mortgage-block").on({
 		mouseenter: function () {
 			$(this).addClass("active")
