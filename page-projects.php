@@ -24,15 +24,28 @@ Template Name: Готовые проекты
 			</div>
 		</div>
 
-		<div class="row">
-			<?php include 'template-parts/projects/filter-block.php'; ?>
-		</div>
+        <?php include 'template-parts/projects/filter-block.php'; ?>
 
-		<div id="finished-projects" class="finished-projects">
-			<?php include 'template-parts/projects/finished-projects.php'; ?>
-		</div>
 
-		<?php include 'template-parts/projects/project-advantages.php'; ?>
+        <?php
+        $projects = get_posts([
+//            'posts_per_page' => -1,
+            'category' => 13,
+            'orderby' => 'date',
+            'order' => 'ASC',
+            'include' => [],
+            'exclude' => [],
+            'meta_key' => '',
+            'meta_value' => '',
+            'post_type' => 'post',
+            'nopaging' => true,
+            'suppress_filters' => true,
+        ]);
+
+        include 'template-parts/projects/finished-projects.php';
+        ?>
+
+        <?php include 'template-parts/projects/project-advantages.php'; ?>
 
 	</div>
 

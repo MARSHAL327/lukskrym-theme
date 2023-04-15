@@ -295,42 +295,9 @@ Template Name: Услуга редизайн
 						<div class="projects-list">
 							<div class="row">
 
-							<?php $projects_list = get_field( 'projects_list' ); ?>
+							<?php $projects = get_field( 'projects_list' ); ?>
 
-							<?php if ( $projects_list ): ?>
-
-								<?php foreach ( $projects_list as $post ):  ?>
-								<?php setup_postdata ( $post ); ?>
-
-								<div class="col-sm-6 col-xl-4">
-									<div class="project-card">
-										<a href="<?php the_permalink($post); ?>" class="project-card-inner">
-											<img class="lazy" src="data:image/gif;base64,R0lGODlhSAAFAIAAAP///wAAACH5BAEAAAEALAAAAABIAAUAAAIRjI+py+0Po5y02ouz3rz7VgAAOw==" data-src="<?php the_post_thumbnail_url( 'project-card-thumb' ); ?>" alt="<?php the_title(); ?>">
-											<div class="project-card__title">
-												<h3 class="project-title"><?php the_title(); ?></h3>
-												<div class="project-area">
-													<span class="project-area__icon"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 448 512"><path d="M447.9 332l.1 136c0 6.6-5.4 12-12 12l-136-.1c-6.6 0-12-5.4-12-12v-27.8c0-6.7 5.5-12.1 12.2-12l61.4 2.3 1.4-1.4-139-139L85 429l1.4 1.4 61.4-2.3c6.7-.1 12.2 5.3 12.2 12v27.8c0 6.6-5.4 12-12 12L12 480c-6.6 0-12-5.4-12-12l.1-136c0-6.6 5.4-12 12-12h27.8c6.7 0 12.1 5.5 12 12.2l-2.3 61.4L51 395l139-139L51 117l-1.4 1.4 2.3 61.4c.1 6.7-5.3 12.2-12 12.2H12.1c-6.6 0-12-5.4-12-12L0 44c0-6.6 5.4-12 12-12l136 .1c6.6 0 12 5.4 12 12v27.8c0 6.7-5.5 12.1-12.2 12l-61.4-2.3L85 83l139 139L363 83l-1.4-1.4-61.4 2.3c-6.7.1-12.2-5.3-12.2-12V44.1c0-6.6 5.4-12 12-12l136-.1c6.6 0 12 5.4 12 12l-.1 136c0 6.6-5.4 12-12 12h-27.8c-6.7 0-12.1-5.5-12-12.2l2.3-61.4-1.4-1.4-139 139 139 139 1.4-1.4-2.3-61.4c-.1-6.7 5.3-12.2 12-12.2h27.8c6.6 0 12 5.4 12 12z"/></svg></span>
-													<span class="project-area__title"><?php the_field( 'project_area' ); ?></span>
-												</div>
-											</div>
-											<div class="project-card__description">
-												<?php if ( get_field('project_bedrooms') ) { ?>
-													<span class="title">Спален: <?php the_field( 'project_bedrooms' ); ?></span>
-												<?php } ?>
-												<?php if ( get_field('project_rooms') ) { ?>
-													<span class="title">Помещений: <?php the_field( 'project_rooms' ); ?></span>
-												<?php } ?>
-												<p><?php the_field( 'project_exerpt' ); ?></p>
-												<span class="more">Посмотреть</span>
-											</div>
-										</a>
-									</div>
-								</div>
-
-								<?php endforeach; ?>
-								<?php wp_reset_postdata(); ?>
-
-							<?php endif; ?>
+							<?php include 'template-parts/projects/finished-projects.php'; ?>
 
 							</div>
 						</div>
