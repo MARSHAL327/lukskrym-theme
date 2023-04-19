@@ -10,7 +10,9 @@
 
 ?>
 
+<p>Показано проектов: <?= count($projects) ?> из <?= count($allProjects) ?></p>
 <div class="projects">
+
     <?php
 
     foreach ($projects as $post):
@@ -56,9 +58,9 @@
                     </div>
                     <div class="project__price">
                         <?php if (get_field("project_price")): ?>
-                            <?= number_format(get_field("project_price"), 0, '', ' '); ?> ₽
+                            <?= priceFormat(get_field("project_price")) ?>
                         <?php else: ?>
-                            Цену уточняйте
+                            Нет цены
                         <?php endif; ?>
                         <div class="project__more">
                             <span>Смотреть проект</span>

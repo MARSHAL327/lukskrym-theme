@@ -6,7 +6,6 @@ jQuery(document).ready(function($) {
 	});
 
 	$('.prices-accordion__button').on('click', function(){
-		console.log('123');
 		var $content = $('.prices-accordion__spoiler')
 		$(this).toggleClass('-active')
 		if ($(this).hasClass('-active')){
@@ -509,38 +508,127 @@ jQuery(document).ready(function($) {
 		return n.replace(/(\d{1,3}(?=(?:\d\d\d)+(?!\d)))/g, "$1" + separator);
 	}
 
-	function calculateCreditMonthPay(){
-		let creditSumName = "credit-sum"
-		let creditTermName = "credit-term"
-		let initialPaymentName = "initial-payment"
+	if( window.location.pathname === "/ipoteka" ){
+		function calculateCreditMonthPay(){
+			let creditSumName = "credit-sum"
+			let creditTermName = "credit-term"
+			let initialPaymentName = "initial-payment"
 
-		let creditSum = $(`input[name=${creditSumName}]`).val()
-		let creditTerm = $(`input[name=${creditTermName}]`).val()
-		let initialPayment = $(`input[name=${initialPaymentName}]`).val()
+			let creditSum = $(`input[name=${creditSumName}]`).val()
+			let creditTerm = $(`input[name=${creditTermName}]`).val()
+			let initialPayment = $(`input[name=${initialPaymentName}]`).val()
 
-		// Ставим полям начальные значения
-		$(`#${creditSumName}`).text(prettify(creditSum))
-		$(`#${creditTermName}`).text(creditTerm)
-		$(`#${initialPaymentName}`).text(initialPayment)
+			// Ставим полям начальные значения
+			$(`#${creditSumName}`).text(prettify(creditSum))
+			$(`#${creditTermName}`).text(creditTerm)
+			$(`#${initialPaymentName}`).text(initialPayment)
 
-		let paymentCount = creditTerm * 12
-		let monthInterestRate = 7.5 / 12 / 100
-		let initialPaymentNumber = creditSum * initialPayment / 100
-		let annuityCoefficient  = monthInterestRate * Math.pow((1 + monthInterestRate), paymentCount) / (Math.pow((1 + monthInterestRate), paymentCount) - 1)
-		let monthlyPayment = Math.trunc((creditSum - initialPaymentNumber) * annuityCoefficient)
-		let totalPay = Math.trunc(monthlyPayment * paymentCount)
+			let paymentCount = creditTerm * 12
+			let monthInterestRate = 7.5 / 12 / 100
+			let initialPaymentNumber = creditSum * initialPayment / 100
+			let annuityCoefficient  = monthInterestRate * Math.pow((1 + monthInterestRate), paymentCount) / (Math.pow((1 + monthInterestRate), paymentCount) - 1)
+			let monthlyPayment = Math.trunc((creditSum - initialPaymentNumber) * annuityCoefficient)
+			let totalPay = Math.trunc(monthlyPayment * paymentCount)
 
-		$("#monthly-payment").text(prettify(monthlyPayment))
-		$("#total-pay").text(prettify(totalPay))
+			$("#monthly-payment").text(prettify(monthlyPayment))
+			$("#total-pay").text(prettify(totalPay))
+		}
+
+		calculateCreditMonthPay()
 	}
-
-	calculateCreditMonthPay()
 
 	$(".input-sliders__slider").on({
 		mousemove: calculateCreditMonthPay,
 		touchmove: calculateCreditMonthPay,
 		change: calculateCreditMonthPay,
 	})
+
+	function changeSlider(values){
+		sendAjax(null, values)
+	}
+
+	function runSlider(){
+		let slider = document.getElementById('slider');
+
+		let prices
+		let params = new URLSearchParams(window.location.search);
+		let priceParams = params.get("project_price")
+
+		let sliderMinValue = $(slider).attr("data-min")
+		let sliderMaxValue = $(slider).attr("data-max")
+
+		if( priceParams )
+			prices = priceParams.split("-")
+
+		noUiSlider.create(slider, {
+			start: prices ?? [sliderMinValue, sliderMaxValue],
+			connect: true,
+			step: 100000,
+			range: {
+				'min': Number(sliderMinValue),
+				'max': Number(sliderMaxValue)
+			}
+		});
+
+		slider.noUiSlider.on('update', function (values) {
+			const min = new Intl.NumberFormat("ru").format(values[0]) + " ₽";
+			const max = new Intl.NumberFormat("ru").format(values[1]) + " ₽";
+
+			$("#slider__values_min").html(min)
+			$("#slider__values_max").html(max)
+		});
+
+		slider.noUiSlider.on('end', changeSlider);
+		slider.noUiSlider.on('change', changeSlider);
+	}
+
+	runSlider()
+
+	function sendAjax(e, sliderValues = []){
+		let originalUrl
+
+		if( sliderValues.length > 0 ){
+			originalUrl = new URL(window.location.href);
+			originalUrl.searchParams.set("project_price", sliderValues.join("-"))
+			originalUrl = originalUrl.toString()
+		} else {
+			e.preventDefault()
+
+			originalUrl = $(e.target).attr("href")
+		}
+
+		let url = originalUrl.split("/")
+		let ajaxBlock = $(".ajax-load")
+
+		if( e && $(e.target).hasClass("filter__clear") ){
+			url = "https://" + window.location.host + "/api-filter/filter"
+		} else {
+			url = "https://" + window.location.host +
+				`${originalUrl.indexOf("filter") >= 0 ? "/api-filter/" : "/api-filter/filter/"}` +
+				url[url.length - 1]
+		}
+
+		$.ajax({
+			url: url,
+			method: 'get',
+			dataType: 'html',
+			beforeSend: function(){
+				ajaxBlock.addClass("loading")
+			},
+			success: function(data){
+				window.history.pushState(null, null, originalUrl)
+				$("#ajax-load__filter-and-projects").html(data)
+				let lazyLoadInstance = new LazyLoad({
+					elements_selector: ".lazy"
+				});
+				runSlider()
+				ajaxBlock.removeClass("loading")
+				$(".filters-block__values__item, .filter__clear").on("click", sendAjax)
+			}
+		});
+	}
+
+	$(".filters-block__values__item, .filter__clear").on("click", sendAjax)
 });
 
 jQuery(window).load(function($) {

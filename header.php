@@ -96,7 +96,6 @@ $phone2 = get_field('phone_2', 8);
                 if (document.readyState !== 'loading') Marquiz.init(o);
                 else document.addEventListener("DOMContentLoaded", function() {
                     Marquiz.init(o);
-                    console.log(Marquiz)
                 });
             };
             d.head.insertBefore(j, d.head.firstElementChild);

@@ -50,6 +50,7 @@ function scripts() {
 		'assets/libs/mixitup2/jquery.mixitup.min.js',
 		'assets/libs/wowjs/wow.min.js',
 		'assets/libs/clamp.js',
+		'assets/libs/nouislider/nouislider.min.js',
 		'assets/libs/swiper/swiper-bundle.min.js',
 		'assets/js/theme.js' // Always at the end
 		])

@@ -5799,6 +5799,19 @@
 	.projects{
 		grid-template-columns: 1fr;
 	}
+
+	.filter{
+		padding: 20px;
+
+		.filters__line-3-fr{
+			display: grid;
+			grid-template-columns: 1fr;
+		}
+	}
+
+	.filters-block__values_slider{
+		width: auto;
+	}
 }
 
 

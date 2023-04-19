@@ -147,7 +147,7 @@ add_action( 'widgets_init', 'lukskrym_widgets_init' );
  * Enqueue scripts and styles.
  */
 function lukskrym_scripts() {
-	
+
 	wp_register_style( 'lukskrym-style', get_stylesheet_directory_uri() . '/assets/css/theme.min.css', array('tablepress-default', 'contact-form-7'), '1.10', 'all');
 
 	wp_enqueue_style( 'lukskrym-style' );
@@ -179,107 +179,106 @@ register_sidebar(array(
  * Breadcrumbs
  */
 function true_breadcrumbs() {
- 
-	// получаем номер текущей страницы
-	$page_num = ( get_query_var( 'paged' ) ) ? get_query_var( 'paged' ) : 1;
- 
-	$separator = ' <span>/</span> ';
- 
-	// если главная страница сайта
-	if ( is_front_page() ) {
- 
- 
-	} else { // не главная
- 
-		echo '<a href="' . site_url() . '">Главная</a>' . $separator;
- 
-		if ( is_single() ) { // записи
 
-			$post_categories = get_the_category();
+    // получаем номер текущей страницы
+    $page_num = (get_query_var('paged')) ? get_query_var('paged') : 1;
 
-			if ( ! empty( $post_categories[0]->cat_ID ) ) {
-				$url_bread = get_category_parents( $post_categories[0]->cat_ID, true, $separator );
-				$stripos = stripos($url_bread,'https://lukskrym.ru/category/portfolio/');
-				$stripos1 = stripos($url_bread,'https://lukskrym.ru/category/real-estate/');
-				$stripos2 = stripos($url_bread,'https://lukskrym.ru/category/projects/');
-				if($stripos!==false){
-					echo '<a href="/portfolio/">Портфолио</a>' . $separator;
-				}
-				elseif($stripos1!==false){
-						echo '<a href="/offers/">Недвижимость</a>' . $separator;
-				}
-				elseif($stripos2!==false){
-						echo '<a href="/projects/">Проекты</a>' . $separator;
-				}
-				else{
-					echo get_category_parents( $post_categories[0]->cat_ID, true, $separator );}//крошки тут
-				
-				echo the_title();
-			}
- 
-		} elseif ( is_page() ){ // страницы WordPress
- 
-			global $post;
-			// если у текущей страницы существует родительская
-			if ( $post->post_parent ) {
-			 
-				$parent_id  = $post->post_parent; // присвоим в переменную
-				$breadcrumbs = array(); 
-			 
-				while ( $parent_id ) {
-					$page = get_page( $parent_id );
-					$breadcrumbs[] = '<a href="' . get_permalink( $page->ID ) . '">' . get_the_title( $page->ID ) . '</a>';
-					$parent_id = $page->post_parent;
-				}
-			 
-				echo join( $separator, array_reverse( $breadcrumbs ) ) . $separator;
-				the_title();
-			 
-			} else {
-				the_title();
-			}
- 
-		} elseif ( is_category() ) {
- 			
- 			$current_cat = get_queried_object();
-			// если родительская рубрика существует
-			if ( $current_cat->parent ) {
-				echo get_category_parents( $current_cat->parent, true, $separator ); echo single_cat_title();
-			} else {
-				single_cat_title();
-			}
- 
-		} elseif ( is_tag() ) {
- 
-			single_tag_title();
- 
-		} elseif ( is_day() ) { // архивы (по дням)
- 
-			echo '<a href="' . get_year_link( get_the_time( 'Y' ) ) . '">' . get_the_time( 'Y' ) . '</a>' . $separator;
-			echo '<a href="' . get_month_link( get_the_time( 'Y' ), get_the_time( 'm' ) ) . '">' . get_the_time( 'F' ) . '</a>' . $separator;
-			echo get_the_time('d');
- 
-		} elseif ( is_month() ) { // архивы (по месяцам)
- 
-			echo '<a href="' . get_year_link( get_the_time( 'Y' ) ) . '">' . get_the_time( 'Y' ) . '</a>' . $separator;
-			echo get_the_time('F');
- 
-		} elseif ( is_year() ) { // архивы (по годам)
- 
-			echo get_the_time( 'Y' );
- 
-		} elseif ( is_author() ) { // архивы по авторам
- 
-			global $author;
-			$userdata = get_userdata( $author );
-			echo 'Опубликовал(а) ' . $userdata->display_name;
- 
-		} elseif ( is_404() ) { // если страницы не существует
- 
-			echo 'Ошибка 404';
- 
-		}
-	}
+    $separator = ' <span>/</span> ';
+
+    // если главная страница сайта
+    if (is_front_page()) {
+
+
+    } else { // не главная
+
+        echo '<a href="' . site_url() . '">Главная</a>' . $separator;
+
+        if (is_single()) { // записи
+
+            $post_categories = get_the_category();
+
+            if (!empty($post_categories[0]->cat_ID)) {
+                $url_bread = get_category_parents($post_categories[0]->cat_ID, true, $separator);
+                $stripos = stripos($url_bread, 'https://lukskrym.ru/category/portfolio/');
+                $stripos1 = stripos($url_bread, 'https://lukskrym.ru/category/real-estate/');
+                $stripos2 = stripos($url_bread, 'https://lukskrym.ru/category/projects/');
+                if ($stripos !== false) {
+                    echo '<a href="/portfolio/">Портфолио</a>' . $separator;
+                } elseif ($stripos1 !== false) {
+                    echo '<a href="/offers/">Недвижимость</a>' . $separator;
+                } elseif ($stripos2 !== false) {
+                    echo '<a href="/projects/">Проекты</a>' . $separator;
+                } else {
+                    echo get_category_parents($post_categories[0]->cat_ID, true, $separator);
+                }//крошки тут
+
+                echo the_title();
+            }
+
+        } elseif (is_page()) { // страницы WordPress
+
+            global $post;
+            // если у текущей страницы существует родительская
+            if ($post->post_parent) {
+
+                $parent_id = $post->post_parent; // присвоим в переменную
+                $breadcrumbs = [];
+
+                while ($parent_id) {
+                    $page = get_page($parent_id);
+                    $breadcrumbs[] = '<a href="' . get_permalink($page->ID) . '">' . get_the_title($page->ID) . '</a>';
+                    $parent_id = $page->post_parent;
+                }
+
+                echo join($separator, array_reverse($breadcrumbs)) . $separator;
+                the_title();
+
+            } else {
+                the_title();
+            }
+
+        } elseif (is_category()) {
+
+            $current_cat = get_queried_object();
+            // если родительская рубрика существует
+            if ($current_cat->parent) {
+                echo get_category_parents($current_cat->parent, true, $separator);
+                echo single_cat_title();
+            } else {
+                single_cat_title();
+            }
+
+        } elseif (is_tag()) {
+
+            single_tag_title();
+
+        } elseif (is_day()) { // архивы (по дням)
+
+            echo '<a href="' . get_year_link(get_the_time('Y')) . '">' . get_the_time('Y') . '</a>' . $separator;
+            echo '<a href="' . get_month_link(get_the_time('Y'), get_the_time('m')) . '">' . get_the_time('F') . '</a>' . $separator;
+            echo get_the_time('d');
+
+        } elseif (is_month()) { // архивы (по месяцам)
+
+            echo '<a href="' . get_year_link(get_the_time('Y')) . '">' . get_the_time('Y') . '</a>' . $separator;
+            echo get_the_time('F');
+
+        } elseif (is_year()) { // архивы (по годам)
+
+            echo get_the_time('Y');
+
+        } elseif (is_author()) { // архивы по авторам
+
+            global $author;
+            $userdata = get_userdata($author);
+            echo 'Опубликовал(а) ' . $userdata->display_name;
+
+        } elseif (is_404()) { // если страницы не существует
+
+            echo 'Ошибка 404';
+
+        }
+    }
 }
 
 // Изменение длины обрезаемого текста при выводе постов
@@ -334,14 +333,16 @@ remove_action('wp_head', 'print_emoji_detection_script', 7); // Удаляет E
 remove_action('wp_print_styles', 'print_emoji_styles'); // Удаляет Emoji
 
 
-function wpcf7_load_js_not_safari11() { 
-	global $is_safari; 
-	if($is_safari) { 
-		return false; 
-	} else { 
-		return true; 
-	} 
+function wpcf7_load_js_not_safari11()
+{
+    global $is_safari;
+    if ($is_safari) {
+        return false;
+    } else {
+        return true;
+    }
 }
+
 add_filter( 'wpcf7_load_js', 'wpcf7_load_js_not_safari11' );
 
 
@@ -473,3 +474,69 @@ $bankLogos = [
         "white" => "/assets/images/RNCB_white.png",
     ],
 ];
+
+add_action("init", function () {
+    add_rewrite_rule('api-filter/(.*)', 'index.php?filter=$matches[1]', 'top');
+    add_rewrite_rule('projects/filter/(.*)', 'index.php?filter=$matches[1]&pagename=projects', 'top');
+});
+
+add_filter('query_vars', function ($query_vars) {
+    $query_vars[] = 'filter';
+    return $query_vars;
+});
+
+add_action("template_include", function ($template) {
+    if( get_query_var("filter") && get_query_var("pagename"))
+        return get_template_directory() . "/page-projects.php";
+
+    if( get_query_var("filter") )
+        return get_template_directory() . "/template-parts/projects/filter-and-projects.php";
+
+    return $template;
+});
+
+function reverse_parse_url(array $parts): string
+{
+    $url = '';
+    if (!empty($parts['scheme'])) {
+        $url .= $parts['scheme'] . ':';
+    }
+    if (!empty($parts['user']) || !empty($parts['host'])) {
+        $url .= '//';
+    }
+    if (!empty($parts['user'])) {
+        $url .= $parts['user'];
+    }
+    if (!empty($parts['pass'])) {
+        $url .= ':' . $parts['pass'];
+    }
+    if (!empty($parts['user'])) {
+        $url .= '@';
+    }
+    if (!empty($parts['host'])) {
+        $url .= $parts['host'];
+    }
+    if (!empty($parts['port'])) {
+        $url .= ':' . $parts['port'];
+    }
+    if (!empty($parts['path'])) {
+        $url .= $parts['path'];
+    }
+    if (!empty($parts['query'])) {
+        if (is_array($parts['query'])) {
+            $url .= '?' . http_build_query($parts['query']);
+        } else {
+            $url .= '?' . $parts['query'];
+        }
+    }
+    if (!empty($parts['fragment'])) {
+        $url .= '#' . $parts['fragment'];
+    }
+
+    return $url;
+}
+
+function priceFormat($price)
+{
+    return number_format($price, 0, '', ' ') . " ₽";
+}
