@@ -597,33 +597,35 @@ jQuery(document).ready(function($) {
 			originalUrl = $(e.target).attr("href")
 		}
 
-		let url = originalUrl.split("/")
-		let ajaxBlock = $(".ajax-load")
+		let urlSplited = originalUrl.split("/")
+		let url = "https://" + window.location.host + "/api-filter/"
 
-		if( e && $(e.target).hasClass("filter__clear") ){
-			url = "https://" + window.location.host + "/api-filter/filter"
-		} else {
-			url = "https://" + window.location.host +
-				`${originalUrl.indexOf("filter") >= 0 ? "/api-filter/" : "/api-filter/filter/"}` +
-				url[url.length - 1]
-		}
 
+		url += (e && $(e.target).hasClass("filter__clear")) ? "clear" : urlSplited[urlSplited.length - 1]
+
+		let ajaxLoadingBlock = $(".ajax-load")
 		$.ajax({
-			url: url,
+			url: originalUrl,
 			method: 'get',
 			dataType: 'html',
 			beforeSend: function(){
-				ajaxBlock.addClass("loading")
+				ajaxLoadingBlock.addClass("loading")
 			},
+			context: document.getElementById("ajax-load__filter-and-projects"),
 			success: function(data){
 				window.history.pushState(null, null, originalUrl)
-				$("#ajax-load__filter-and-projects").html(data)
+				let ajaxBlock = "#ajax-load__filter-and-projects"
+				let htmlResult = new DOMParser().parseFromString(data, "text/html")
+
+				$(ajaxBlock).html($(htmlResult).find(ajaxBlock))
+
 				let lazyLoadInstance = new LazyLoad({
 					elements_selector: ".lazy"
 				});
+
 				runSlider()
-				ajaxBlock.removeClass("loading")
 				$(".filters-block__values__item, .filter__clear").on("click", sendAjax)
+				ajaxLoadingBlock.removeClass("loading")
 			}
 		});
 	}

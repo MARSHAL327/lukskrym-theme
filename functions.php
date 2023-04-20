@@ -475,26 +475,6 @@ $bankLogos = [
     ],
 ];
 
-add_action("init", function () {
-    add_rewrite_rule('api-filter/(.*)', 'index.php?filter=$matches[1]', 'top');
-    add_rewrite_rule('projects/filter/(.*)', 'index.php?filter=$matches[1]&pagename=projects', 'top');
-});
-
-add_filter('query_vars', function ($query_vars) {
-    $query_vars[] = 'filter';
-    return $query_vars;
-});
-
-add_action("template_include", function ($template) {
-    if( get_query_var("filter") && get_query_var("pagename"))
-        return get_template_directory() . "/page-projects.php";
-
-    if( get_query_var("filter") )
-        return get_template_directory() . "/template-parts/projects/filter-and-projects.php";
-
-    return $template;
-});
-
 function reverse_parse_url(array $parts): string
 {
     $url = '';
@@ -539,4 +519,29 @@ function reverse_parse_url(array $parts): string
 function priceFormat($price)
 {
     return number_format($price, 0, '', ' ') . " ₽";
+}
+
+function getFilterName($url){
+    preg_match('/(gotovye-proekty|api-filter)\/([\w_-]*)(\?.*)?/', $url, $matches);
+    return $matches[2];
+}
+
+function getChildPostsSlug($parentId){
+    $childPosts = [];
+
+    $args = array(
+        'post_type'      => 'page',
+        'posts_per_page' => -1,
+        'post_parent'    => $parentId,
+        'order'          => 'ASC',
+        'orderby'        => 'menu_order'
+    );
+    $objectsChildPost = get_posts( $args );
+
+    foreach ($objectsChildPost as $objectChildPost) {
+        $slug = getFilterName(get_permalink($objectChildPost->ID));
+        $childPosts[$slug] = $slug;
+    }
+
+    return $childPosts;
 }

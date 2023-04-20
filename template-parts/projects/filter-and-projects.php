@@ -22,17 +22,17 @@ $defaultProjectParams = [
     'suppress_filters' => true,
 ];
 $projectQueryFilter = [];
+$filterQuery = getFilterName($_SERVER["REQUEST_URI"]);
 
-if (!empty(get_query_var("filter")) || !empty($_GET))
+if (($filterQuery != "clear" && !empty($filterQuery)) || !empty($_GET))
     $projectQueryFilter = [
         'relation' => 'AND',
     ];
 
-$filterQuery = get_query_var("filter");
-if ($filterQuery && $filterQuery != "filter" && $filterQuery != "filter/gotovye-proekty") {
+if ($filterQuery && $filterQuery != "clear") {
     $projectQueryFilter[] = [
         'key' => 'project_categories',
-        'value' => '"' . get_query_var("filter") . '"',
+        'value' => '"' . $filterQuery . '"',
         'compare' => 'LIKE',
     ];
 }
@@ -73,8 +73,20 @@ foreach ($_GET as $propName => $items) {
 $allProjects = get_posts($defaultProjectParams);
 ?>
 
-<?php include 'filter-block.php'; ?>
+    <div class="row">
+        <div class="col-12">
+            <div class="breadcrumbs">
+                <?php true_breadcrumbs(); ?>
+            </div>
+        </div>
+        <div class="col-12 text-center">
+            <h1 class="page-title">
+                <?php the_field('page_projects_title'); ?>
+            </h1>
+        </div>
+    </div>
 
+<?php include 'filter-block.php'; ?>
 
 <?php
 $defaultProjectParams['meta_query'] = $projectQueryFilter;

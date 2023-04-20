@@ -11,7 +11,6 @@
 function filterBlock($filterProp)
 {
     $defaultGetParams = $_GET;
-
     ?>
     <div class="filters-block">
         <div class="filters-block__title">
@@ -21,7 +20,8 @@ function filterBlock($filterProp)
             <?php if ($filterProp["type"] == "select"): ?>
                 <?php foreach ($filterProp["values"] as $filterPropKey => $filterPropValue): ?>
                     <?php
-                    $filterQuery = get_query_var("filter");
+                    $filterQuery = getFilterName($_SERVER["REQUEST_URI"]);
+
                     $activeItem = $_GET[$filterProp["slug"]] ? array_search($filterPropKey, $_GET[$filterProp["slug"]]) : false;
                     $isActive = $filterProp["slug"] ?
                         ($activeItem !== false):
@@ -35,11 +35,11 @@ function filterBlock($filterProp)
                             $_GET[$filterProp["slug"]][] = $filterPropKey;
                         }
 
-                        $link = urldecode("/gotovye-proekty/" . ($filterQuery && $filterQuery != "filter" ? "filter/" . $filterQuery : "") . (!empty($_GET) ? "?" . http_build_query($_GET) : "") );
+                        $link = urldecode("/gotovye-proekty/" . $filterQuery . (!empty($_GET) ? "?" . http_build_query($_GET) : "") );
                         $_GET = $defaultGetParams;
                     } else {
                         $link = "/gotovye-proekty/" .
-                            ($isActive ? "" : "filter/" . $filterPropKey) . // формирование ссылки для особенностей
+                            ($isActive ? "" : $filterPropKey) . // формирование ссылки для особенностей
                             ($_SERVER["QUERY_STRING"] ? "?$_SERVER[QUERY_STRING]" : ""); // формирование гет параметров
                     }
                     ?>
@@ -129,9 +129,11 @@ $filterProps = [
     ],
 ];
 
+$childPosts = getChildPostsSlug(39);
+
 $features = [
     "name" => "Особенности",
-    "values" => $filterValues["props"],
+    "values" => array_intersect_key($filterValues["props"], $childPosts) ,
     "type" => "select",
 ];
 
