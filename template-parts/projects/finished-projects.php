@@ -2,15 +2,29 @@
 
 /**
  * @var $projects
+ * @var $allProjects
  */
 
 /*
 	Проекты
 */
 
+$projectsNum = count($projects);
+$allProjectsNum = count($allProjects);
 ?>
 
-<p>Показано проектов: <?= count($projects) ?> из <?= count($allProjects) ?></p>
+<div class="projects__count">
+
+    <?php if( $projectsNum == 0 ): ?>
+        <p>Проектов по заданному фильтру не найдено</p>
+        <a href="/gotovye-proekty" class="button filter__clear">
+            Очистить фильтр
+        </a>
+    <?php else: ?>
+        <p>Показано проектов: <?= $projectsNum ?> из <?= $allProjectsNum ?></p>
+    <?php endif; ?>
+</div>
+
 <div class="projects">
 
     <?php
@@ -39,45 +53,37 @@
                  data-src="<?php the_post_thumbnail_url('project-card-thumb'); ?>"
                  alt="Проект дома <?php the_title(); ?>">
             <div class="project__info">
-                <div class="project__header">
-                    <div class="project__params">
-                        <?php foreach ($props as $prop): ?>
-                            <?php if ($characteristicsTitleKeys[$prop["name"]]): ?>
-                                <div class="project__params__item">
-                                    <div class="project__params__icon"><?= $prop["icon"] ?></div>
-                                    <div>
-                                        <div class="project__params__name"><?= $prop["title"] ?></div>
-                                        <div class="project__params__value"><?= $characteristicsTitleKeys[$prop["name"]] ?></div>
-                                    </div>
+                <div class="project__params">
+                    <?php foreach ($props as $prop): ?>
+                        <?php if ($characteristicsTitleKeys[$prop["name"]]): ?>
+                            <div class="project__params__item">
+                                <div class="project__params__icon"><?= $prop["icon"] ?></div>
+                                <div>
+                                    <div class="project__params__name"><?= $prop["title"] ?></div>
+                                    <div class="project__params__value"><?= $characteristicsTitleKeys[$prop["name"]] ?></div>
                                 </div>
-                            <?php endif; ?>
-                        <?php endforeach; ?>
-                    </div>
-                    <div class="project__name">
-                        <?= get_the_title() ?>
-                    </div>
-                    <div class="project__price">
-                        <?php if (get_field("project_price")): ?>
-                            <?= priceFormat(get_field("project_price")) ?>
-                        <?php else: ?>
-                            Нет цены
+                            </div>
                         <?php endif; ?>
-                        <div class="project__more">
-                            <span>Смотреть проект</span>
-                            <svg width="51" height="8" viewBox="0 0 51 8" fill="none"
-                                 xmlns="http://www.w3.org/2000/svg">
-                                <path d="M50.3536 4.35356C50.5488 4.1583 50.5488 3.84171 50.3536 3.64645L47.1716 0.46447C46.9763 0.269208 46.6597 0.269208 46.4645 0.46447C46.2692 0.659732 46.2692 0.976315 46.4645 1.17158L49.2929 4L46.4645 6.82843C46.2692 7.02369 46.2692 7.34028 46.4645 7.53554C46.6597 7.7308 46.9763 7.7308 47.1716 7.53554L50.3536 4.35356ZM-4.37114e-08 4.5L50 4.5L50 3.5L4.37114e-08 3.5L-4.37114e-08 4.5Z"
-                                      fill="#CCCCCC"/>
-                            </svg>
-                        </div>
-
-                    </div>
+                    <?php endforeach; ?>
                 </div>
-                <div class="project__description">
-                    <div class="project__description__wrapper">
-                        <p>Спален: <?= get_field("project_bedrooms") ?></p>
-                        <p><?= get_field("project_exerpt") ?></p>
+                <div class="project__name">
+                    <?= get_the_title() ?>
+                </div>
+                <div class="project__price">
+                    <?php if (get_field("project_price")): ?>
+                        <?= priceFormat(get_field("project_price")) ?>
+                    <?php else: ?>
+                        Нет цены
+                    <?php endif; ?>
+                    <div class="project__more">
+                        <span>Смотреть проект</span>
+                        <svg width="51" height="8" viewBox="0 0 51 8" fill="none"
+                             xmlns="http://www.w3.org/2000/svg">
+                            <path d="M50.3536 4.35356C50.5488 4.1583 50.5488 3.84171 50.3536 3.64645L47.1716 0.46447C46.9763 0.269208 46.6597 0.269208 46.4645 0.46447C46.2692 0.659732 46.2692 0.976315 46.4645 1.17158L49.2929 4L46.4645 6.82843C46.2692 7.02369 46.2692 7.34028 46.4645 7.53554C46.6597 7.7308 46.9763 7.7308 47.1716 7.53554L50.3536 4.35356ZM-4.37114e-08 4.5L50 4.5L50 3.5L4.37114e-08 3.5L-4.37114e-08 4.5Z"
+                                  fill="#CCCCCC"/>
+                        </svg>
                     </div>
+
                 </div>
             </div>
         </a>

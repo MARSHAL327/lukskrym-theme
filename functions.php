@@ -9,7 +9,7 @@
 
 if ( ! defined( '_S_VERSION' ) ) {
 	// Replace the version number of the theme on each release.
-	define( '_S_VERSION', '1.4.0' );
+	define( '_S_VERSION', '1.5.0' );
 }
 
 /**
@@ -148,7 +148,7 @@ add_action( 'widgets_init', 'lukskrym_widgets_init' );
  */
 function lukskrym_scripts() {
 
-	wp_register_style( 'lukskrym-style', get_stylesheet_directory_uri() . '/assets/css/theme.min.css', array('tablepress-default', 'contact-form-7'), '1.10', 'all');
+	wp_register_style( 'lukskrym-style', get_stylesheet_directory_uri() . '/assets/css/theme.min.css', array('tablepress-default', 'contact-form-7'), '1.11', 'all');
 
 	wp_enqueue_style( 'lukskrym-style' );
 
@@ -522,8 +522,8 @@ function priceFormat($price)
 }
 
 function getFilterName($url){
-    preg_match('/(gotovye-proekty|api-filter)\/([\w_-]*)(\?.*)?/', $url, $matches);
-    return $matches[2];
+    preg_match('/gotovye-proekty\/([\w_-]*)(\?.*)?/', $url, $matches);
+    return $matches[1];
 }
 
 function getChildPostsSlug($parentId){

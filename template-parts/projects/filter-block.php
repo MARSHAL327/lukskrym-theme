@@ -10,6 +10,7 @@
 
 function filterBlock($filterProp)
 {
+    if( empty($filterProp["values"]) ) {  echo ""; return; }
     $defaultGetParams = $_GET;
     ?>
     <div class="filters-block">
@@ -133,7 +134,7 @@ $childPosts = getChildPostsSlug(39);
 
 $features = [
     "name" => "Особенности",
-    "values" => array_intersect_key($filterValues["props"], $childPosts) ,
+    "values" => [] ,
     "type" => "select",
 ];
 

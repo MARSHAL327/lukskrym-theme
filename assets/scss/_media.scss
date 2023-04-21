@@ -232,7 +232,7 @@
 			padding: 15px 30px;
 		}
 	}
-	.project {
+	.project-page {
 		&__description {
 			padding-left: 40px;
 		}
@@ -1734,13 +1734,13 @@
 			}
 		}
 	}
-	.project__description {
+	.project-page__description {
 		padding-left: 15px;
 	}
 	.post-template-single-portfolio-design,
 	.post-template-single-house-sale {
 		.popular-projects__item {
-			.project-description {
+			.project-page-description {
 				margin-left: 15px;
 			}
 
@@ -1748,7 +1748,7 @@
 				font-size: 17px;
 			}
 
-			.project-info__item {
+			.project-page-info__item {
 				margin-right: 12px;
 
 				svg {
@@ -1875,7 +1875,7 @@
 			}
 		}
 	}
-	.project {
+	.project-page {
 		&__description {
 			padding-left: 10px;
 		}
@@ -2122,13 +2122,7 @@
 			}
 
 			&__info{
-				transform: translateY(253px);
-			}
-
-			&__header{
-				grid-template-columns: repeat(2, 1fr);
-				height: auto;
-				align-items: end;
+				grid-template-columns: none;
 			}
 
 			&__params {
@@ -2209,7 +2203,7 @@
 			}
 		}
 	}
-	.project {
+	.project-page {
 		&__description {
 			padding-left: 0;
 			margin-top: 35px;
@@ -4300,7 +4294,7 @@
 			margin: 0 0 25px !important;
 		}
 	}
-	.project {
+	.project-page {
 		margin-top: 25px;
 
 		&__gallery {
@@ -4330,7 +4324,7 @@
 		&__description {
 			margin-top: 10px;
 
-			.project-text {
+			.project-page-text {
 				margin-top: 25px;
 			}
 
