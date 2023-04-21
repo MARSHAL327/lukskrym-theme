@@ -6732,8 +6732,9 @@ section{
     position: relative;
     box-sizing: border-box;
     animation: rotation 1s linear infinite;
-    margin: 130px auto;
+    margin: 300px auto;
 }
+
 .loader::after {
     content: '';
     box-sizing: border-box;
