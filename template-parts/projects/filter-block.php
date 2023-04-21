@@ -134,7 +134,7 @@ $childPosts = getChildPostsSlug(39);
 
 $features = [
     "name" => "Особенности",
-    "values" => [] ,
+    "values" => array_intersect_key($filterValues["props"], $childPosts) ,
     "type" => "select",
 ];
 
