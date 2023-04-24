@@ -3,27 +3,29 @@
 /**
  * @var $projects
  * @var $allProjects
+ * @var $noCount
  */
 
 /*
 	Проекты
 */
 
-$projectsNum = count($projects);
-$allProjectsNum = count($allProjects);
+if (!$noCount):
+    $projectsNum = count($projects);
+    $allProjectsNum = count($allProjects);
 ?>
 
-<div class="projects__count">
-
-    <?php if( $projectsNum == 0 ): ?>
-        <p>Проектов по заданному фильтру не найдено</p>
-        <a href="/gotovye-proekty" class="button filter__clear">
-            Очистить фильтр
-        </a>
-    <?php else: ?>
-        <p>Показано проектов: <?= $projectsNum ?> из <?= $allProjectsNum ?></p>
-    <?php endif; ?>
-</div>
+    <div class="projects__count">
+        <?php if( $projectsNum == 0 ): ?>
+            <p>Проектов по заданному фильтру не найдено</p>
+            <a href="/gotovye-proekty" class="button filter__clear">
+                Очистить фильтр
+            </a>
+        <?php else: ?>
+            <p>Показано проектов: <?= $projectsNum ?> из <?= $allProjectsNum ?></p>
+        <?php endif; ?>
+    </div>
+<?php endif; ?>
 
 <div class="projects">
 

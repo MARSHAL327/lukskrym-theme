@@ -295,7 +295,7 @@ Template Name: Услуга редизайн
 						<div class="projects-list">
 							<div class="row">
 
-							<?php $projects = get_field( 'projects_list' ); ?>
+							<?php $projects = get_field( 'projects_list' ); $noCount = true ?>
 
 							<?php include 'template-parts/projects/finished-projects.php'; ?>
 
