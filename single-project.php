@@ -251,33 +251,10 @@ Template Post Type: post
 					</div>
 				</div>
 
-				<?php $similar_projects_items = get_field( 'similar_projects_items' ); ?>
+				<?php $projects = get_field( 'similar_projects_items' ); $noCount = true; ?>
 
-				<?php if ( $similar_projects_items ): ?>
-					<div class="row">
+                <?php include 'template-parts/projects/finished-projects.php'; ?>
 
-					<?php foreach ( $similar_projects_items as $post ):  ?>
-					<?php setup_postdata ( $post ); ?>
-
-						<div class="col-md-6 col-xl-4">
-							<div class="similar-project">
-								<a href="<?php the_permalink($post); ?>" class="similar-project__thumb">
-									<img class="lazy" src=data:image/gif;base64,R0lGODlhOQAoAIAAAP///wAAACH5BAEAAAEALAAAAAA5ACgAAAIxjI+py+0Po5y02ouz3rz7D4biSJbmiabqyrbuC8fyTNf2jef6zvf+DwwKh8Si8WgoAAA7 data-src="<?php the_post_thumbnail_url( 'project-card-thumb' ); ?>" alt="<?php the_title(); ?>">
-								</a>
-								<div class="similar-project__description">
-									<h3><?php the_title(); ?></h3>
-									<p>Внешняя площадь дома: <span><?php the_field( 'project_area' ); ?></span></p>
-									<p>Площадь помещений дома: <span><?php the_field( 'project_area_rooms' ); ?></span></p>
-									<a href="<?php the_permalink($post); ?>" class="button">Подробнее</a>
-								</div>
-							</div>
-						</div>
-
-					<?php endforeach; ?>
-					<?php wp_reset_postdata(); ?>
-
-					</div>
-				<?php endif; ?>
 
 			</div>
 		</div>
