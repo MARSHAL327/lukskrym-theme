@@ -102,6 +102,8 @@ foreach ($allProjects as $post) {
 $filterValues["prices"]["min"] = $min;
 $filterValues["prices"]["max"] = $max;
 
+asort($filterValues["floors"], SORT_NUMERIC);
+
 $filterProps = [
     [
         "name" => "Количество этажей",
