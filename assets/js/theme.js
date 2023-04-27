@@ -617,6 +617,7 @@ jQuery(document).ready(function($) {
 				let ajaxBlock = "#ajax-load__filter-and-projects"
 				let htmlResult = new DOMParser().parseFromString(data, "text/html")
 
+				document.title = htmlResult.title;
 				$(ajaxBlock).html($(htmlResult).find(ajaxBlock))
 
 				let lazyLoadInstance = new LazyLoad({
