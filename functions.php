@@ -504,7 +504,7 @@ function add_menu_list_item_class($classes, $item, $args)
 
 add_filter('nav_menu_css_class', 'add_menu_list_item_class', 1, 3);
 
-$mortgagePageId = 12168;
+$mortgagePageId = url_to_postid("ipoteka");
 
 function reverse_parse_url(array $parts): string
 {
