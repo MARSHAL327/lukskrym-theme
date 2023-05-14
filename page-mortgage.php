@@ -15,6 +15,7 @@ $specialCredits = get_field("special_credits") ?? [];
 $firstColumn = get_field("first_column") ?? [];
 $secondColumn = get_field("second_column") ?? [];
 $additionalBlock = get_field("additional_block") ?? [];
+$colorAndWhiteBankLogo = get_field("color_and_white_bank_logo") ?? [];
 $mortgageTypesWithSteps = [];
 
 foreach ($mortgageTypes as $mortgageType) {
@@ -36,10 +37,10 @@ foreach ($mortgageTypes as $mortgageType) {
                         <h1><?= get_field("h1_title") ?></h1>
                         <div class="form-description__description-block">
                             <span>Аккредитованы в самых крупных банках Крыма:</span>
-                            <div class="bank-items">
-                                <?php foreach ($bankLogos as $bankLogo): ?>
+                            <div class="bank-items <?= count($colorAndWhiteBankLogo) > 4 ? "bank-items_grid" : "" ?>">
+                                <?php foreach ($colorAndWhiteBankLogo as $bankLogo): ?>
                                     <div class="bank-items__item">
-                                        <img src="<?= get_template_directory_uri() . $bankLogo["color"] ?>" alt="">
+                                        <img src="<?= $bankLogo["url"] ?>" alt="">
                                     </div>
                                 <?php endforeach; ?>
                             </div>

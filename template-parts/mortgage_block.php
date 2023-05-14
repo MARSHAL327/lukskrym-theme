@@ -1,3 +1,9 @@
+<?php
+/**
+ * @var $mortgagePageId
+ */
+?>
+
 <?php if( get_field("show_mortgage_block") ): ?>
     <div class="section grey-block">
         <div class="container">
@@ -13,18 +19,11 @@
                     </div>
 
                     <a href="/ipoteka" class="banks__items">
-                        <div class="banks__item">
-                            <img src="<?= get_template_directory_uri() . "/assets/images/BR_logo.png" ?>" alt="">
-                        </div>
-                        <div class="banks__item">
-                            <img src="<?= get_template_directory_uri() . "/assets/images/LOGO_HOME.png" ?>" alt="">
-                        </div>
-                        <div class="banks__item">
-                            <img src="<?= get_template_directory_uri() . "/assets/images/SBER_LOGO.png" ?>" alt="">
-                        </div>
-                        <div class="banks__item">
-                            <img src="<?= get_template_directory_uri() . "/assets/images/RNCB.png" ?>" alt="">
-                        </div>
+                        <?php foreach (get_field("color_bank_logo", $mortgagePageId) as $bankLogo): ?>
+                            <div class="banks__item">
+                                <img src="<?= $bankLogo["url"] ?>" alt="">
+                            </div>
+                        <?php endforeach; ?>
                     </a>
                 </div>
             </div>

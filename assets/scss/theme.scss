@@ -1330,11 +1330,12 @@ form {
 
 .bank-items {
     display: flex;
+    flex-wrap: wrap;
     align-items: center;
-    gap: 12px;
+    gap: 20px;
 
-    &__item:nth-child(3) {
-        width: 103px;
+    &__item {
+        max-width: 115px;
     }
 
     &__item_color {
@@ -1478,7 +1479,7 @@ form {
             display: flex;
             flex-wrap: wrap;
             align-items: center;
-            gap: 12px;
+            gap: 20px;
             padding: 15px;
             background: rgba(0, 0, 0, 0.1);
             backdrop-filter: blur(16px);
@@ -6259,8 +6260,25 @@ form {
         }
     }
 
-    .bank-items__item:nth-child(3) {
-        width: auto;
+    .bank-items {
+        &_grid{
+            display: grid;
+            grid-template-columns: 2fr 1fr 2fr;
+            width: 450px;
+
+            & .bank-items__item{
+                max-width: initial;
+
+                & img{
+                    height: 35px;
+                    object-fit: contain;
+                }
+            }
+        }
+
+        &__item {
+            max-width: 195px;
+        }
     }
 }
 

@@ -5,7 +5,7 @@
 */
 
 /**
- * @var $bankLogos
+ * @var $mortgagePageId
  */
 
 $homeSlider = get_field('home_slider');
@@ -13,11 +13,13 @@ $marquizLink = get_field("marquiz_link", 8);
 $emptyElements = 0;
 
 foreach ($homeSlider as $slide) {
-    if( trim($slide["title"]) == "" && trim($slide["description"]) == "" )
+    if (trim($slide["title"]) == "" && trim($slide["description"]) == "")
         $emptyElements++;
 }
 
-$onlyFirstSlideFilled = count($homeSlider) - 1 == $emptyElements ? "true" : "false"
+$onlyFirstSlideFilled = count($homeSlider) - 1 == $emptyElements ? "true" : "false";
+$colorAndWhiteBankLogo = get_field("color_and_white_bank_logo", $mortgagePageId);
+$whiteBankLogo = get_field("white_bank_logo", $mortgagePageId);
 ?>
 
 <div class="header-slider">
@@ -25,7 +27,7 @@ $onlyFirstSlideFilled = count($homeSlider) - 1 == $emptyElements ? "true" : "fal
         <div class="swiper frontpage-slides__swiper"
              data-only-first-slide-filled="<?= $onlyFirstSlideFilled ?>"
              style="--swiper-pagination-color: #007a9b;">
-            <div class="swiper-wrapper" >
+            <div class="swiper-wrapper">
                 <?php foreach ($homeSlider as $slide): ?>
                     <div class="swiper-slide"
                          data-title="<?= $slide["title"] ?>"
@@ -46,9 +48,9 @@ $onlyFirstSlideFilled = count($homeSlider) - 1 == $emptyElements ? "true" : "fal
                 <div class="header-content">
                     <div class="header-content__center">
                         <div class="header-content__title">
-                            <h1><?= $homeSlider[0]["title"] ?> <span><?= $homeSlider[0]["description"] ?></span> </h1>
+                            <h1><?= $homeSlider[0]["title"] ?> <span><?= $homeSlider[0]["description"] ?></span></h1>
                         </div>
-                        <?php if( $bankLogos ): ?>
+                        <?php if ($colorAndWhiteBankLogo && $whiteBankLogo && count($colorAndWhiteBankLogo) == count($whiteBankLogo)): ?>
                             <a href="/ipoteka" class="header-content__mortgage-block">
                                 <div class="header-content__mortgage-block__item">
                                     <svg width="18" height="17" viewBox="0 0 18 17" fill="none"
@@ -58,18 +60,18 @@ $onlyFirstSlideFilled = count($homeSlider) - 1 == $emptyElements ? "true" : "fal
                                         <path d="M5.44644 13.7462L5.37573 13.8169L5.44644 13.8877L6.01212 14.4533L6.08283 14.5241L6.15354 14.4533L12.5534 8.05351L12.6241 7.98279L12.5533 7.91208L11.9877 7.34643L11.917 7.27572L11.8462 7.34643L5.44644 13.7462ZM6.99995 7.20005C6.06262 7.20005 5.29996 7.9624 5.29996 8.90004C5.29996 9.83769 6.06288 10.6 6.99995 10.6C7.93729 10.6 8.69994 9.83768 8.69994 8.90004C8.69994 7.9624 7.93729 7.20005 6.99995 7.20005ZM6.99995 9.60003C6.61386 9.60003 6.29996 9.28589 6.29996 8.90004C6.29996 8.51419 6.61386 8.20004 6.99995 8.20004C7.38604 8.20004 7.69995 8.51419 7.69995 8.90004C7.69995 9.28589 7.38604 9.60003 6.99995 9.60003ZM10.9999 11.2C10.0626 11.2 9.29994 11.9624 9.29994 12.9C9.29994 13.8377 10.0626 14.6 10.9999 14.6C11.9373 14.6 12.6999 13.8377 12.6999 12.9C12.6999 11.9624 11.9373 11.2 10.9999 11.2ZM10.9999 13.6C10.6138 13.6 10.2999 13.2859 10.2999 12.9C10.2999 12.5142 10.6138 12.2 10.9999 12.2C11.386 12.2 11.6999 12.5142 11.6999 12.9C11.6999 13.2859 11.386 13.6 10.9999 13.6Z"
                                               fill="white" stroke="white" stroke-width="0.2"/>
                                     </svg>
-                                    <span>Ипотека от 4 банков</span>
+                                    <span>Ипотека от <?= count($colorAndWhiteBankLogo) ?> банков</span>
                                 </div>
                                 <div class="bank-items">
-                                    <?php foreach ($bankLogos as $bankLogo): ?>
+                                    <?php for ($i = 0; $i < count($colorAndWhiteBankLogo); $i++): ?>
                                         <div class="bank-items__item">
                                             <img class="bank-items__item_color"
-                                                 src="<?= get_template_directory_uri() . $bankLogo["color"] ?>" alt="">
+                                                 src="<?= $colorAndWhiteBankLogo[$i]["url"] ?>" alt="">
                                             <img class="bank-items__item_white"
-                                                 src="<?= get_template_directory_uri() . $bankLogo["white"] ?>"
+                                                 src="<?= $whiteBankLogo[$i]["url"] ?>"
                                                  alt="">
                                         </div>
-                                    <?php endforeach; ?>
+                                    <?php endfor; ?>
                                 </div>
                             </a>
                         <?php endif; ?>

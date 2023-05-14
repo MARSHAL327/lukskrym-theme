@@ -3621,6 +3621,16 @@
 	.project-card__props{
 		width: 100%;
 	}
+
+	.form-description .bank-items{
+		flex-wrap: nowrap;
+	}
+
+	.form-description .bank-items_grid{
+		grid-template-columns: 1fr 1fr;
+		width: auto;
+		justify-items: center;
+	}
 }
 
 
