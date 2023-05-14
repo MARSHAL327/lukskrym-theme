@@ -597,12 +597,6 @@ jQuery(document).ready(function($) {
 			originalUrl = $(e.target).attr("href")
 		}
 
-		let urlSplited = originalUrl.split("/")
-		let url = "https://" + window.location.host + "/api-filter/"
-
-
-		url += (e && $(e.target).hasClass("filter__clear")) ? "clear" : urlSplited[urlSplited.length - 1]
-
 		let ajaxLoadingBlock = $(".ajax-load")
 		$.ajax({
 			url: originalUrl,
