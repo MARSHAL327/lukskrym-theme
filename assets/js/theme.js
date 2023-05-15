@@ -548,6 +548,8 @@ jQuery(document).ready(function($) {
 	}
 
 	function runSlider(){
+		if( !noUiSlider ) return false
+
 		let slider = document.getElementById('slider');
 
 		let prices
