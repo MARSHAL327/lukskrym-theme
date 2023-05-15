@@ -36,7 +36,7 @@ foreach ($mortgageTypes as $mortgageType) {
                     <div class="form-description__description">
                         <h1><?= get_field("h1_title") ?></h1>
                         <div class="form-description__description-block">
-                            <span>Аккредитованы в самых крупных банках Крыма:</span>
+                            <span><?= get_field("bank_description") ?></span>
                             <div class="bank-items <?= count($colorAndWhiteBankLogo) > 4 ? "bank-items_grid" : "" ?>">
                                 <?php foreach ($colorAndWhiteBankLogo as $bankLogo): ?>
                                     <div class="bank-items__item">
