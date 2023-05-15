@@ -548,40 +548,42 @@ jQuery(document).ready(function($) {
 	}
 
 	function runSlider(){
-		if( !noUiSlider ) return false
+		try{
+			let slider = document.getElementById('slider');
 
-		let slider = document.getElementById('slider');
+			let prices
+			let params = new URLSearchParams(window.location.search);
+			let priceParams = params.get("project_price")
 
-		let prices
-		let params = new URLSearchParams(window.location.search);
-		let priceParams = params.get("project_price")
+			let sliderMinValue = $(slider).attr("data-min")
+			let sliderMaxValue = $(slider).attr("data-max")
 
-		let sliderMinValue = $(slider).attr("data-min")
-		let sliderMaxValue = $(slider).attr("data-max")
+			if( priceParams )
+				prices = priceParams.split("-")
 
-		if( priceParams )
-			prices = priceParams.split("-")
+			noUiSlider.create(slider, {
+				start: prices ?? [sliderMinValue, sliderMaxValue],
+				connect: true,
+				step: 100000,
+				range: {
+					'min': Number(sliderMinValue),
+					'max': Number(sliderMaxValue)
+				}
+			});
 
-		noUiSlider.create(slider, {
-			start: prices ?? [sliderMinValue, sliderMaxValue],
-			connect: true,
-			step: 100000,
-			range: {
-				'min': Number(sliderMinValue),
-				'max': Number(sliderMaxValue)
-			}
-		});
+			slider.noUiSlider.on('update', function (values) {
+				const min = new Intl.NumberFormat("ru").format(values[0]) + " ₽";
+				const max = new Intl.NumberFormat("ru").format(values[1]) + " ₽";
 
-		slider.noUiSlider.on('update', function (values) {
-			const min = new Intl.NumberFormat("ru").format(values[0]) + " ₽";
-			const max = new Intl.NumberFormat("ru").format(values[1]) + " ₽";
+				$("#slider__values_min").html(min)
+				$("#slider__values_max").html(max)
+			});
 
-			$("#slider__values_min").html(min)
-			$("#slider__values_max").html(max)
-		});
-
-		slider.noUiSlider.on('end', changeSlider);
-		slider.noUiSlider.on('change', changeSlider);
+			slider.noUiSlider.on('end', changeSlider);
+			slider.noUiSlider.on('change', changeSlider);
+		} catch (e){
+			console.log(e.message)
+		}
 	}
 
 	runSlider()
